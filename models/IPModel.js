@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 
 const IP = new mongoose.Schema({
     // The IP address, either IPV4 or IPV6
