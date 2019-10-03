@@ -6,7 +6,7 @@
  * @module services/IPService
  * @author John L. Carveth
  */
-class IPService {
+module.exports = class IPService {
     /**
      * @constructor IPService
      * @param {IPModel} ipModel 
