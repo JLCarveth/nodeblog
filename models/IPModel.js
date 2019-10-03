@@ -1,6 +1,15 @@
+/**
+ * @module models/IPModel 
+ * @author John L. Carveth
+ */
+
+
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
+/**
+ * @constructor IP
+ */
 const IP = new mongoose.Schema({
     // The IP address, either IPV4 or IPV6
     address: { type: String, required: true },

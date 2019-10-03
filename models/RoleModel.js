@@ -1,5 +1,13 @@
+/**
+ * @module models/RoleModel
+ * @author John L. Carveth
+ */
+
 const mongoose = require('mongoose')
 
+/**
+ * @constructor Role
+ */
 const Role = new mongoose.Schema({
     role: {
         type: String,

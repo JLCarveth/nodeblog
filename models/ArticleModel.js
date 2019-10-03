@@ -6,7 +6,7 @@
 const mongoose = require('mongoose')
 
 /**
- * @const Article describes how an article will be stored in the db
+ * @constructor Article
  */
 const Article = new mongoose.Schema({
     title: { type: String, required: true, trim: true },

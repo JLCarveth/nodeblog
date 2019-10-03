@@ -1,9 +1,14 @@
 /**
  * Handles the business logic for IP addresses.
+ * IPService can ban and unban IP addresses, as well as see if an IP address
+ * has been banned.
+ * 
+ * @module services/IPService
+ * @author John L. Carveth
  */
 class IPService {
     /**
-     * Inject the data-layer dependency
+     * @constructor IPService
      * @param {IPModel} ipModel 
      */
     constructor (ipModel) {

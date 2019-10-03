@@ -1,6 +1,14 @@
+/**
+ * @module models/UserModel
+ * @author John L. Carveth
+ */
+
 const mongoose = require('mongoose')
 const isEmail = require('../validators').isEmail
 
+/**
+ * @constructor User
+ */
 const User = new mongoose.Schema({
     email: {
         type: String,

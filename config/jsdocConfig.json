@@ -1,0 +1,5 @@
+{
+    "source" : {
+        "include": ["./services", "./models", "./validators", "./api"]
+    }
+}

@@ -1,3 +1,7 @@
+/**
+ * @module Validator provides auxillary functions to validate the correct
+ * structure of data.
+ */
 module.exports = {
     /**
      * @function isEmail
