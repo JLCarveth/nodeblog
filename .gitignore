@@ -1,4 +1,4 @@
 # JSDoc output
 out
 # JSDoc config file
-./config/jsdocConfig.json
+config\jsdocConfig.json
