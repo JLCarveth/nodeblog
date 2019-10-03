@@ -2,7 +2,7 @@
  * @module services/UserService
  * @author John L. Carveth
  */
-class UserService {
+module.exports = class UserService {
     /**
      * @constructor UserService
      * @param {models/UserModel} userModel 

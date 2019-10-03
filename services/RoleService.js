@@ -3,7 +3,7 @@
  * @author John L. Carveth
  */
 
- class RoleService {
+module.exports = class RoleService {
 
     /**
      * @constructor RoleService
@@ -47,4 +47,4 @@
     revokeAllPermissions (roleName) {
 
     }
- }
+}

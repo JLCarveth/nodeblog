@@ -3,7 +3,7 @@
  * @author John L. Carveth
  */
 
-class ArticleService {
+module.exports = class ArticleService {
     /**
      * @constructor ArticleService
      * @param {models/ArticleModel} articleModel 
