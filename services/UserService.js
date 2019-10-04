@@ -17,15 +17,24 @@ module.exports = class UserService {
      * @param {String} email 
      * @param {String} password 
      */
-    register(username, email, password) {
+    register (username, email, password) {
 
+    }
+
+    /**
+     * 
+     * @param {String} email 
+     * @param {String} password 
+     */
+    login (email, password) {
+        
     }
 
     /**
      * Removes the given user from the system
      * @param {ObjectID} id the unique ID of the user to delete
      */
-    deleteUser(id) {
+    deleteUser (id) {
 
     }
 
@@ -35,7 +44,7 @@ module.exports = class UserService {
      * @param {String} newPass 
      * @param {String} email 
      */
-    changePassword(oldPass, newPass, email) {
+    changePassword (oldPass, newPass, email) {
 
     }
 }
