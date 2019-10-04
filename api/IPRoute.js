@@ -1,5 +1,5 @@
 /**
- * @module api/IPRoute
+ * @module IPRoute
  * @requires express
  * IPRoute router acts on "/ip" baseURL
  */
@@ -22,7 +22,7 @@ const IPService = new (require('../services/IPService'))(ipModel)
  * POST request to /ip/ban
  * @name GET/ip/ban
  * @function
- * @memberof module:api/IPRoute~iPRouter
+ * @memberof module:IPRoute
  */
 router.post('/ban', (req,res) => {
     console.log('IPRoute - /ban')
@@ -41,7 +41,7 @@ router.post('/ban', (req,res) => {
  * POST request to /ip/unban
  * @name GET/ip/unban
  * @function
- * @memberof module:api/IPRoute~ipRouter
+ * @memberof module:IPRoute
  */
 router.post('/unban', (req,res) => {
     const address = req.body.address

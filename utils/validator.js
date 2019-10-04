@@ -3,7 +3,7 @@
  */
 module.exports = {
     /**
-     * @memberof Validator
+     * @memberof module:Validator
      * @function isEmail
      * A middleware function that validates a given string as an email address.
      */

@@ -3,7 +3,7 @@
  * IPService can ban and unban IP addresses, as well as see if an IP address
  * has been banned.
  * 
- * @module services/IPService
+ * @module IPService
  * @author John L. Carveth
  */
 module.exports = class IPService {
@@ -17,7 +17,8 @@ module.exports = class IPService {
 
     /**
      * Bans an IP address
-     * @memberof services/IPService
+     * @memberof module:IPService
+     * @function banAddress
      * @param {*} address an IPv4 or IPv6 address
      * @param {*} reason optional reason for being banned
      */
@@ -36,7 +37,8 @@ module.exports = class IPService {
 
     /**
      * Unbans an IP address
-     * @memberof services/IPService
+     * @memberof module:IPService
+     * @function unbanAddress
      * @param {*} address an IPv4 or IPv6 address
      */
     async unbanAddress (address) {
@@ -49,7 +51,8 @@ module.exports = class IPService {
 
     /**
      * Checks if given address is banned
-     * @memberof services/IPService
+     * @memberof module:IPService
+     * @function checkAddress
      * @param {*} address 
      * @return true if the address is found in the collection
      */

@@ -1,5 +1,5 @@
 /**
- * @module services/UserService
+ * @module UserService
  * @author John L. Carveth
  */
 module.exports = class UserService {
@@ -13,6 +13,8 @@ module.exports = class UserService {
 
     /**
      * Registers a new user to the system
+     * @memberof module:UserService
+     * @function register
      * @param {String} username 
      * @param {String} email 
      * @param {String} password 
@@ -22,7 +24,8 @@ module.exports = class UserService {
     }
 
     /**
-     * 
+     * @memberof module:UserService
+     * @function login
      * @param {String} email 
      * @param {String} password 
      */
@@ -32,6 +35,8 @@ module.exports = class UserService {
 
     /**
      * Removes the given user from the system
+     * @memberof module:UserService
+     * @function deleteUser
      * @param {ObjectID} id the unique ID of the user to delete
      */
     deleteUser (id) {
@@ -40,6 +45,8 @@ module.exports = class UserService {
 
     /**
      * Change a registered user's existing password.
+     * @memberof module:UserService
+     * @function changePassword
      * @param {String} oldPass 
      * @param {String} newPass 
      * @param {String} email 

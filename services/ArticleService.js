@@ -1,5 +1,5 @@
 /**
- * @module services/ArticleService
+ * @module ArticleService
  * @author John L. Carveth
  */
 
@@ -14,6 +14,8 @@ module.exports = class ArticleService {
 
     /**
      * Creates a new Article
+     * @memberof module:ArticleService
+     * @function createArticle
      * @param {String} title 
      * @param {String} tagline 
      * @param {ObjectID} author 
@@ -26,6 +28,8 @@ module.exports = class ArticleService {
 
     /**
      * Approves an article, making it visible to the end user
+     * @memberof module:ArticleService
+     * @function approveArticle
      * @param {ObjectID} id
      * @return true if the article with given ID is approved.
      */
@@ -35,6 +39,8 @@ module.exports = class ArticleService {
 
     /**
      * Deletes an article with the given ID value
+     * @memberof module:ArticleService
+     * @function deleteArticle
      * @param {ObjectID} id 
      */
     deleteArticle(id) {
@@ -43,6 +49,8 @@ module.exports = class ArticleService {
 
     /**
      * Updates the content of the article with the given ID
+     * @memberof module:ArticleService
+     * @function updateArticle
      * @param {ObjectID} id 
      * @param {String} content the edited content, in Markdown format 
      */

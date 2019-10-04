@@ -1,5 +1,5 @@
 /**
- * @module api/RoleRoute
+ * @module RoleRoute
  * @requires express
  * @requires services/RoleModel
  * @requires services/RoleService
@@ -13,7 +13,6 @@ const express = require('express')
 
 /**
  * @const
- * @namespace roleRouter
  */
 const router = express.Router()
 
@@ -24,7 +23,7 @@ const RoleService = new (require('../services/RoleService'))(RoleModel)
  * GET request on /role/permissions/:role
  * @name GET/role/permissions/
  * @function
- * @memberof module:api/RoleRoute~roleRouter
+ * @memberof module:RoleRoute
  */
 router.get('/permissions/:role', (req,res) => {
     const role = req.params.role
@@ -41,7 +40,7 @@ router.get('/permissions/:role', (req,res) => {
  * GET request on /role/grant/:role/:permission
  * @name GET/role/grant
  * @function
- * @memberof module:api/RoleRoute~roleRouter
+ * @memberof module:RoleRoute
  */
 router.get('/grant/:role/:permission', (req,res) => {
     const role = req.params.role
@@ -59,7 +58,7 @@ router.get('/grant/:role/:permission', (req,res) => {
  * GET request on /role/revoke/:role/:permission
  * @name GET/role/revoke
  * @function
- * @memberof module:api/RoleRoute~roleRouter
+ * @memberof module:RoleRoute
  */
 router.get('/revoke/:role/:permission', () => {
     const role = req.params.role
@@ -77,7 +76,7 @@ router.get('/revoke/:role/:permission', () => {
  * GET request on /role/revokeAll/:role
  * @name GET/role/revokeAll
  * @function
- * @memberof module:api/RoleRoute~roleRouter
+ * @memberof module:RoleRoute
  */
 router.get('/revokeAll/:role', (req,res) => {
     const role = req.params.role
