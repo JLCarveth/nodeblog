@@ -2,3 +2,6 @@
 out
 # JSDoc config file
 config/jsdoc.json
+
+# Nodemodules
+./node_modules
