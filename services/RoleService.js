@@ -22,11 +22,9 @@ module.exports = class RoleService {
      */
     async getRolePermissions (roleName) {
         try {
-            const result = await this.roleModel.findAll({
+            return this.roleModel.findAll({
                 role: roleName
             }).exec()
-
-            return result
         } catch (e) {
             throw new Error(e)
         }
@@ -46,8 +44,7 @@ module.exports = class RoleService {
 
             perms.concat(','+permission)
 
-            const result = await roleModel.update({role:roleName}, {permissions:perms}).exec()
-            return result
+            return roleModel.update({role:roleName}, {permissions:perms}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -71,8 +68,7 @@ module.exports = class RoleService {
             if (index != -1) perms.splice(index, 1)
             perms = perms.join(',')
 
-            const result = await roleModel.update({role:roleName}, {permissions:perms}).exec()
-            return result
+            return roleModel.update({role:roleName}, {permissions:perms}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -86,8 +82,7 @@ module.exports = class RoleService {
      */
     async revokeAllPermissions (roleName) {
         try {
-            const result = await roleModel.update({role:roleName}, {permissions:""}).exec()
-            return result
+            return roleModel.update({role:roleName}, {permissions:""}).exec()
         } catch (e) {
             throw new Error(e)
         }
