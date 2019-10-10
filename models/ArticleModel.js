@@ -1,5 +1,5 @@
 /**
- * @module models/ArticleModel
+ * @module ArticleModel
  * @author John L. Carveth
  */
 
@@ -11,10 +11,9 @@ const mongoose = require('mongoose')
 const Article = new mongoose.Schema({
     title: { type: String, required: true, trim: true },
     tagline: { type: String, required: false, trim: true },
-    image: {type: String, required: false},
     // Author refers to the ObjectID of a document in the users collection (a registered user)
     author: { 
-        type: String,
+        type: mongoose.Types.ObjectId,
         required:true
     },
     // When the article was published
@@ -29,7 +28,7 @@ const Article = new mongoose.Schema({
     },
     // The comments on the specific blog post. Comments can only be made by registered users
     comments: [{
-        author: { type: String, required: true }, // Using the User's name instead of ID to prevent future lookups to get their name
+        author: { type: mongoose.Types.ObjectId, required: true },
         date: { type: Date, default: Date.now },
         content: { type: String, required: true }
     }],

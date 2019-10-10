@@ -43,7 +43,7 @@ module.exports = class IPService {
      */
     async unbanAddress (address) {
         try {
-            await this.ipModel.deleteOne({address:address})
+            return this.ipModel.deleteOne({address:address}).exec()
         } catch (e) {
             throw new Error(e)
         }

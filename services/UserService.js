@@ -25,7 +25,7 @@ module.exports = class UserService {
         const hash = this.Authenticator.hashPassword(password)
 
         try {
-            UserModel.create({
+            return UserModel.create({
                 username: username,
                 email: email,
                 password: hash.hash,
@@ -68,7 +68,7 @@ module.exports = class UserService {
      */
     deleteUser (id) {
         try {
-            UserModel.deleteOne({_id:id}).exec()
+            return UserModel.deleteOne({_id:id}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -91,7 +91,7 @@ module.exports = class UserService {
 
             if (valid) {
                 const hash = this.Authenticator.hashPassword(newPass)
-                UserModel.updateOne({email:email}, {password:hash.hash, salt:hash.salt}).exec()
+                return UserModel.updateOne({email:email}, {password:hash.hash, salt:hash.salt}).exec()
             } else throw new Error('Could not change password.')
         } catch (e) {
             throw new Error(e)

@@ -1,5 +1,5 @@
 /**
- * @module models/UserModel
+ * @module UserModel
  * @author John L. Carveth
  */
 

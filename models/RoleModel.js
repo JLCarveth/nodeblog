@@ -1,5 +1,5 @@
 /**
- * @module models/RoleModel
+ * @module RoleModel
  * @author John L. Carveth
  */
 

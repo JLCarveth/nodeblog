@@ -6,7 +6,7 @@
 module.exports = class ArticleService {
     /**
      * @constructor ArticleService
-     * @param {models/ArticleModel} articleModel 
+     * @param {module:ArticleModel} articleModel 
      */
     constructor (articleModel) {
         this.articleModel = articleModel
@@ -23,7 +23,19 @@ module.exports = class ArticleService {
      * @param {String} tags for categorization, saparated by commas 
      */
     createArticle (title, tagline, author, content, tags) {
+        try {
+            const article = {
+                title:title,
+                tagline:tagline,
+                author:author,
+                content:content,
+                tags:tags
+            }
 
+            return this.articleModel.create(article)
+        } catch (e) {
+            throw new Error(e)
+        }
     }
 
     /**
@@ -33,8 +45,12 @@ module.exports = class ArticleService {
      * @param {ObjectID} id
      * @return true if the article with given ID is approved.
      */
-    approveArticle(id) {
-
+    approveArticle (id) {
+        try {
+            return this.articleModel.updateOne({_id:id}, {approved:true}).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
     }
 
     /**
@@ -43,18 +59,86 @@ module.exports = class ArticleService {
      * @function deleteArticle
      * @param {ObjectID} id 
      */
-    deleteArticle(id) {
-
+    deleteArticle (id) {
+        try {
+            return this.articleModel.deleteOne({_id:id}).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
     }
 
     /**
-     * Updates the content of the article with the given ID
+     * Updates the content of the article with the given ID.
+     * Also updates the article's date
      * @memberof module:ArticleService
      * @function updateArticle
      * @param {ObjectID} id 
      * @param {String} content the edited content, in Markdown format 
      */
-    updateArticle(id, content) {
+    updateArticle (id, content) {
+        try {
+            return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now})
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
 
+    /**
+     * Gets the article with the given ID, if it exists
+     * @memberof module:ArticleService
+     * @function getArticleByID
+     * @param {ObjectID} id
+     * @return the article with given id
+     */
+    getArticleByID (id) {
+        try {
+            const article = await this.articleModel.findById({_id:id}).exec()
+            return article
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    /**
+     * Gets *n* recent articles
+     * @memberof module:ArticleService
+     * @function getRecentArticles
+     * @param {Number} n 
+     */
+    getRecentArticles (n) {
+        try {
+            return this.articleModel.find({approved:true}).sort({date:-1}).limit(n).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    /**
+     * Gets all articles published by a given author
+     * @memberof module:ArticleService
+     * @function getArticlesByAuthor
+     * @param {ObjectID} id 
+     */
+    getArticlesByAuthor (id) {
+        try {
+            return this.articleModel.find({author:id}).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    /**
+     * Finds all articles with matching tag
+     * @memberof module:ArticleService
+     * @function getArticlesByTag
+     * @param {String} tag
+     */
+    getArticlesByTag(tags) {
+        try {
+            const exp = new RegExp(tags, 'g')
+            return this.articleModel.find({tags: {$regex: exp.toString()}})
+        } catch (e) {
+            throw new Error(e)
+        }
     }
 }

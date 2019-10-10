@@ -1,5 +1,5 @@
 /**
- * @module models/IPModel 
+ * @module IPModel 
  * @author John L. Carveth
  */
 
