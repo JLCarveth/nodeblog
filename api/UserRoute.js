@@ -15,7 +15,7 @@ const express = require('express')
 const router = express.Router()
 
 const UserModel = require('../models/UserModel')
-const UserService = new (require('../services/UserService'))(userModel)
+const UserService = new (require('../services/UserService'))(UserModel)
 
 router.post('/login', (req,res) => {
     try {

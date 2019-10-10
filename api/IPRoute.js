@@ -16,7 +16,7 @@ const express = require('express')
 const router = express.Router()
 
 const IPModel = require('../models/IPModel')
-const IPService = new (require('../services/IPService'))(ipModel)
+const IPService = new (require('../services/IPService'))(IPModel)
 
 /**
  * POST request to /ip/ban
