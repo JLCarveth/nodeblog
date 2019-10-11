@@ -134,10 +134,45 @@ module.exports = class ArticleService {
      * @function getArticlesByTag
      * @param {String} tags
      */
-    async getArticlesByTag(tags) {
+    async getArticlesByTag (tags) {
         try {
             const exp = new RegExp(tags, 'g')
             return this.articleModel.find({tags: {$regex: exp.toString()}})
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    /**
+     * Posts a comment onto an article
+     * @memberof module:ArticleService
+     * @function postComment
+     * @param {*} articleID where the comment will be posted
+     * @param {*} commentAuthor id of author of the comment 
+     * @param {*} content the comment's content
+     */
+    async postComment (articleID, commentAuthor, content) {
+        try {
+            const comment = {author: commentAuthor, content:content}
+            return ArticleModel.findOneAndUpdate({_id:articleID}, {
+                $push: {comments: comment}
+            }).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    /**
+     * Removes all comments on an article posted by commentAuthor
+     * @memberof module:ArticleService
+     * @function removeComment
+     * @param {*} articleID id of article where offending comment was posted
+     * @param {*} commentAuthor id of author of offending comment
+     */
+    async removeComment (articleID, commentAuthor) {
+        try {
+            return ArticleModel.findOneAndUpdate({_id:articleID}, {
+                $pull: {comments: {author:commentAuthor}}})
         } catch (e) {
             throw new Error(e)
         }
