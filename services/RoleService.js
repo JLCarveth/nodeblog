@@ -44,7 +44,7 @@ module.exports = class RoleService {
 
             perms.concat(','+permission)
 
-            return roleModel.update({role:roleName}, {permissions:perms}).exec()
+            return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -68,7 +68,7 @@ module.exports = class RoleService {
             if (index != -1) perms.splice(index, 1)
             perms = perms.join(',')
 
-            return roleModel.update({role:roleName}, {permissions:perms}).exec()
+            return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -82,7 +82,15 @@ module.exports = class RoleService {
      */
     async revokeAllPermissions (roleName) {
         try {
-            return roleModel.update({role:roleName}, {permissions:""}).exec()
+            return this.roleModel.update({role:roleName}, {permissions:""}).exec()
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    async getAllRoles () {
+        try {
+            return this.roleModel.findAll({}).exec()
         } catch (e) {
             throw new Error(e)
         }

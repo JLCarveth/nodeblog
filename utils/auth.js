@@ -39,6 +39,14 @@ module.exports = {
         })
     },
 
+    verifyToken (token) {
+        try {
+            return jwt.verify(token, process.env.secretKey)
+        } catch (e) {
+            throw new Error(e)
+        }
+    },
+
     /**
      * @memberof module:Authenticator
      * @function hashPassword
