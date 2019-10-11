@@ -22,7 +22,7 @@ module.exports = class ArticleService {
      * @param {String} content article body content, in Markdown format 
      * @param {String} tags for categorization, saparated by commas 
      */
-    createArticle (title, tagline, author, content, tags) {
+    async createArticle (title, tagline, author, content, tags) {
         try {
             const article = {
                 title:title,
@@ -45,7 +45,7 @@ module.exports = class ArticleService {
      * @param {ObjectID} id
      * @return true if the article with given ID is approved.
      */
-    approveArticle (id) {
+    async approveArticle (id) {
         try {
             return this.articleModel.updateOne({_id:id}, {approved:true}).exec()
         } catch (e) {
@@ -59,7 +59,7 @@ module.exports = class ArticleService {
      * @function deleteArticle
      * @param {ObjectID} id 
      */
-    deleteArticle (id) {
+    async deleteArticle (id) {
         try {
             return this.articleModel.deleteOne({_id:id}).exec()
         } catch (e) {
@@ -75,7 +75,7 @@ module.exports = class ArticleService {
      * @param {ObjectID} id 
      * @param {String} content the edited content, in Markdown format 
      */
-    updateArticle (id, content) {
+    async updateArticle (id, content) {
         try {
             return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now})
         } catch (e) {
@@ -90,7 +90,7 @@ module.exports = class ArticleService {
      * @param {ObjectID} id
      * @return the article with given id
      */
-    getArticleByID (id) {
+    async getArticleByID (id) {
         try {
             const article = await this.articleModel.findById({_id:id}).exec()
             return article
@@ -105,7 +105,7 @@ module.exports = class ArticleService {
      * @function getRecentArticles
      * @param {Number} n 
      */
-    getRecentArticles (n) {
+    async getRecentArticles (n) {
         try {
             return this.articleModel.find({approved:true}).sort({date:-1}).limit(n).exec()
         } catch (e) {
@@ -119,7 +119,7 @@ module.exports = class ArticleService {
      * @function getArticlesByAuthor
      * @param {ObjectID} id 
      */
-    getArticlesByAuthor (id) {
+    async getArticlesByAuthor (id) {
         try {
             return this.articleModel.find({author:id}).exec()
         } catch (e) {
@@ -128,12 +128,13 @@ module.exports = class ArticleService {
     }
 
     /**
-     * Finds all articles with matching tag
+     * Finds all articles with matching tag(s). Multiple tags should work, provided
+     * they're separated by commas.
      * @memberof module:ArticleService
      * @function getArticlesByTag
-     * @param {String} tag
+     * @param {String} tags
      */
-    getArticlesByTag(tags) {
+    async getArticlesByTag(tags) {
         try {
             const exp = new RegExp(tags, 'g')
             return this.articleModel.find({tags: {$regex: exp.toString()}})

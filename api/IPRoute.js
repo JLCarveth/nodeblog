@@ -25,16 +25,14 @@ const IPService = new (require('../services/IPService'))(IPModel)
  * @memberof module:IPRoute
  */
 router.post('/ban', (req,res) => {
-    console.log('IPRoute - /ban')
     const address = req.body.address
     const reason = req.body.reason
 
-    try {
-        const result = IPService.banAddress(address,reason)
+    IPService.banAddress(address,reason).then((result) => {
         res.send({success:true, message:result})
-    } catch (e) {
+    }).catch ((e) => {
         res.send({success:false, error:e})
-    }
+    })
 })
 
 /**
@@ -46,12 +44,11 @@ router.post('/ban', (req,res) => {
 router.post('/unban', (req,res) => {
     const address = req.body.address
 
-    try {
-        IPService.unbanAddress(address)
-        res.send({success:true, message:'Address ' + address + ' unbanned successfully.'})
-    } catch (e) {
-        res.send({success:false, error:e})
-    }
+        IPService.unbanAddress(address).then((result) => {
+            res.send({success:true, message:result})
+        }).catch((e) => {
+            res.send({success:false, error:e})
+        })
 })
 
 module.exports = router;

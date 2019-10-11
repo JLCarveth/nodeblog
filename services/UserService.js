@@ -21,7 +21,7 @@ module.exports = class UserService {
      * @param {String} email 
      * @param {String} password 
      */
-    register (username, email, password) {
+    async register (username, email, password) {
         const hash = this.Authenticator.hashPassword(password)
 
         try {
@@ -43,7 +43,7 @@ module.exports = class UserService {
      * @param {String} password 
      * @return A token generated for the user, or an error if authentication failed
      */
-    login (email, password) {
+    async login (email, password) {
         try {
             const user = UserModel.findOne({email:email}).exec()
             const valid = this.Authenticator.comparePassword(password, user.hash)
@@ -66,7 +66,7 @@ module.exports = class UserService {
      * @function deleteUser
      * @param {ObjectID} id the unique ID of the user to delete
      */
-    deleteUser (id) {
+    async deleteUser (id) {
         try {
             return UserModel.deleteOne({_id:id}).exec()
         } catch (e) {
@@ -82,7 +82,7 @@ module.exports = class UserService {
      * @param {String} newPass 
      * @param {String} email 
      */
-    changePassword (oldPass, newPass, email) {
+    async changePassword (oldPass, newPass, email) {
         try {
             const user = UserModel.findOne({email:email}).exec()
             const valid = user.password == this.Authenticator.hashWithSalt(
