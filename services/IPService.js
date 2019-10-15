@@ -53,7 +53,7 @@ module.exports = class IPService {
      * Checks if given address is banned
      * @memberof module:IPService
      * @function checkAddress
-     * @param {*} address 
+     * @param {*} address the address to check
      * @return true if the address is found in the collection
      */
     async checkAddress (address) {

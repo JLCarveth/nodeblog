@@ -1,5 +1,5 @@
 /**
- * @module tags parses and compiles tags 
+ * @module tags
  */
 
 /**

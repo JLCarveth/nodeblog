@@ -1,7 +1,8 @@
 # JSDoc output
 out
-# JSDoc config file
+#config files
 config/jsdoc.json
+config/*.json
 
 # Nodemodules
 ./node_modules

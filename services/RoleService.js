@@ -88,6 +88,11 @@ module.exports = class RoleService {
         }
     }
 
+    /**
+     * Gets all roles and the permissions they have
+     * @memberof module:RoleService
+     * @function getAllRoles
+     */
     async getAllRoles () {
         try {
             return this.roleModel.findAll({}).exec()

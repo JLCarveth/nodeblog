@@ -16,9 +16,9 @@ module.exports = class ArticleService {
      * Creates a new Article
      * @memberof module:ArticleService
      * @function createArticle
-     * @param {String} title 
-     * @param {String} tagline 
-     * @param {ObjectID} author 
+     * @param {String} title article title
+     * @param {String} tagline article tagline / subtitle
+     * @param {ObjectID} author User ID of article author
      * @param {String} content article body content, in Markdown format 
      * @param {String} tags for categorization, saparated by commas 
      */
@@ -42,7 +42,7 @@ module.exports = class ArticleService {
      * Approves an article, making it visible to the end user
      * @memberof module:ArticleService
      * @function approveArticle
-     * @param {ObjectID} id
+     * @param {ObjectID} id id of the article to be approved
      * @return true if the article with given ID is approved.
      */
     async approveArticle (id) {
@@ -57,7 +57,7 @@ module.exports = class ArticleService {
      * Deletes an article with the given ID value
      * @memberof module:ArticleService
      * @function deleteArticle
-     * @param {ObjectID} id 
+     * @param {ObjectID} id id of the article to be removed
      */
     async deleteArticle (id) {
         try {
@@ -72,12 +72,12 @@ module.exports = class ArticleService {
      * Also updates the article's date
      * @memberof module:ArticleService
      * @function updateArticle
-     * @param {ObjectID} id 
+     * @param {ObjectID} id id of article to be updated
      * @param {String} content the edited content, in Markdown format 
      */
     async updateArticle (id, content) {
         try {
-            return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now})
+            return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -87,7 +87,7 @@ module.exports = class ArticleService {
      * Gets the article with the given ID, if it exists
      * @memberof module:ArticleService
      * @function getArticleByID
-     * @param {ObjectID} id
+     * @param {ObjectID} id id of article to fetch
      * @return the article with given id
      */
     async getArticleByID (id) {
@@ -103,7 +103,7 @@ module.exports = class ArticleService {
      * Gets *n* recent articles
      * @memberof module:ArticleService
      * @function getRecentArticles
-     * @param {Number} n 
+     * @param {Number} n number of articles to fetch
      */
     async getRecentArticles (n) {
         try {
@@ -117,7 +117,7 @@ module.exports = class ArticleService {
      * Gets all articles published by a given author
      * @memberof module:ArticleService
      * @function getArticlesByAuthor
-     * @param {ObjectID} id 
+     * @param {ObjectID} id author id
      */
     async getArticlesByAuthor (id) {
         try {
@@ -132,12 +132,12 @@ module.exports = class ArticleService {
      * they're separated by commas.
      * @memberof module:ArticleService
      * @function getArticlesByTag
-     * @param {String} tags
+     * @param {String} tags tags to search for
      */
     async getArticlesByTag (tags) {
         try {
             const exp = new RegExp(tags, 'g')
-            return this.articleModel.find({tags: {$regex: exp.toString()}})
+            return this.articleModel.find({tags: {$regex: exp.toString()}}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -172,7 +172,7 @@ module.exports = class ArticleService {
     async removeComment (articleID, commentAuthor) {
         try {
             return ArticleModel.findOneAndUpdate({_id:articleID}, {
-                $pull: {comments: {author:commentAuthor}}})
+                $pull: {comments: {author:commentAuthor}}}).exec()
         } catch (e) {
             throw new Error(e)
         }
