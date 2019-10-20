@@ -4,7 +4,7 @@
  * @author John L. Carveth
  */
 
-const fs = require('fs').promises
+const fs = require('fs')
 const config = require('./config.json')
 
 const baseConfig = {
@@ -17,24 +17,23 @@ const baseConfig = {
     }
 }
 
-const defaultConfig = config[environment]
-
-const keys = Object.keys(defaultConfig)
-// Map each key from the default environment to process.env
-keys.forEach((key) => {
-    process.env[key] = defaultConfig[key]
-})
-
 /**
  * @module Configurator sets all config variables
  */
 module.exports = class Configurator {
     constructor () {
         // Create a base config file if it doesn't already exist
-        this.generateDefaultConfig()
+        this.writeConfig(baseConfig, 'ax')
+        // Import it
         const config = require('./config.json')
+        // Detect environment to determine which configuration to use
         this.environment = process.env.NODE_ENV || 'development'
         this.config = config[environment]
+        // merge baseConfig and config stored on disk.
+        this.config = {...baseConfig,...this.config}
+        // update config stored on disk with any new config variables from baseConfig
+        this.writeConfig(this.config, 'w')
+        // Assign config values to provess.env variables
         this.populateEnvironment()
     }
 
@@ -50,11 +49,18 @@ module.exports = class Configurator {
         })
     }
 
-    generateDefaultConfig () {
-        fs.writeFile('./config.json', JSON.stringify(baseConfig), {flag: 'ax'}).then((result) => {
-            console.log(result)
-        }).catch ((e) => {
-            throw new Error(e)
-        })
+    /**
+     * Overwrites config.json with new configuration settings
+     * @param {Object} configuration JSON config object
+     * @param {String} flag Node FS module flag
+     */
+    writeConfig (configuration, flag) {
+        try {
+            fs.writeFileSync('./config.json', JSON.stringify(configuration), {flag: flag})
+        } catch (e) {
+            if (e.code === "EEXIST") {
+                console.log('Configuration file already exists.')
+            } else throw new Error(e)
+        }
     }
 }

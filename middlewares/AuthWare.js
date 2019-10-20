@@ -4,7 +4,9 @@
  * @version 0.2.0
  * @requires module:Authenticator
  * 
- * ExpressJS middleware that automatically verifies JWTs attached to incoming requests
+ * ExpressJS middleware that automatically verifies JWTs attached to incoming requests.
+ * If a token is successfully decoded, the role and email from the token are
+ * stored in res.locals for later middlewares to access.
  */
 
 /**
