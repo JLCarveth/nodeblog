@@ -2,8 +2,6 @@
  * @module IPModel 
  * @author John L. Carveth
  */
-
-
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 

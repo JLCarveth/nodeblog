@@ -10,8 +10,7 @@
 const express = require('express')
 
 /**
- * @const
- * @namespace ipRouter
+ * @const ipRouter
  */
 const router = express.Router()
 

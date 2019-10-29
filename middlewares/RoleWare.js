@@ -1,21 +1,21 @@
 /**
+ * @const RoleModel
+ */
+const RoleModel = require('../models/RoleModel')
+const RoleService = new (require('../services/RoleService'))(RoleModel)
+
+/**
  * Middleware that protects routes by only allowing access to
  * those with the correct role credentials.
  * @module RoleWare
  * @author John L. Carveth
  * @version 0.4.0
  */
-
-/**
- * @const RoleModel
- */
-const RoleModel = require('../models/RoleModel')
-const RoleService = new (require('../services/RoleService'))(RoleModel)
-
 module.exports = class RoleWare {
     /**
-     * Creates a new RoleWare middleware with permissions as parameter
+     * @constructor RoleWare
      * @param {String} permission permissions required for the route
+     * @return {Function} the created middleware function
      */
     constructor (permission) {
         this.permission = permission

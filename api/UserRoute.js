@@ -44,3 +44,5 @@ router.post('/register', (req,res) => {
         res.send({success:false, error:e})
     })
 })
+
+module.exports = router;

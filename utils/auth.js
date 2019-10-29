@@ -47,7 +47,7 @@ module.exports = {
      * @param {String} token JWT to be verified
      * @return the decoded token, or throw an error
      */
-    verifyToken (token) {
+    verifyToken : function (token) {
         try {
             return jwt.verify(token, process.env.secretKey)
         } catch (e) {
@@ -75,8 +75,8 @@ module.exports = {
      * Hashes a password with a pre-determined salt
      * @memberof module:Authenticator
      * @function hashWithSalt
-     * @param {String} password
-     * @param {String} salt
+     * @param {String} password the password to be hashed
+     * @param {String} salt a random salting string
      * @return {Object.<String,String>} object containing the hash and salt
      */
     hashWithSalt : function (password, salt) {

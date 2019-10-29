@@ -1,6 +1,6 @@
 /**
  * Populates the environment variables based on configuration settings
- * @module config
+ * @module Configurator
  * @author John L. Carveth
  */
 
@@ -17,11 +17,13 @@ const baseConfig = {
     }
 }
 
-/**
- * @module Configurator sets all config variables
- */
-module.exports = class Configurator {
-    constructor () {
+module.exports = {
+    /**
+     * Initializes the Configuration module
+     * @memberof module:Configurator
+     * @function init 
+     */
+    init : function () {
         // Create a base config file if it doesn't already exist
         this.writeConfig(baseConfig, 'ax')
         // Import it
@@ -35,26 +37,28 @@ module.exports = class Configurator {
         this.writeConfig(this.config, 'w')
         // Assign config values to provess.env variables
         this.populateEnvironment()
-    }
+    },
 
     /**
      * Populates process.env with all config variables
      * @memberof module:Configurator
      * @function populateEnvironment
      */
-    populateEnvironment () {
+    populateEnvironment : function () {
         const keys = Object.keys(this.config)
         keys.forEach((key) => {
             process.env[key] = this.config[key]
         })
-    }
+    },
 
     /**
      * Overwrites config.json with new configuration settings
-     * @param {Object} configuration JSON config object
+     * @memberof module:Configurator
+     * @function writeConfig
+     * @param {Object} configuration JSON config object to be written
      * @param {String} flag Node FS module flag
      */
-    writeConfig (configuration, flag) {
+    writeConfig : function (configuration, flag) {
         try {
             fs.writeFileSync('./config.json', JSON.stringify(configuration), {flag: flag})
         } catch (e) {

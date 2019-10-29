@@ -14,6 +14,11 @@
  */
 const Authenticator = require('../utils/auth')
 
+/**
+ * @param {Object} req Express.js request object
+ * @param {Object} res Express.js response object
+ * @param {Function} next next middleware in the chain
+ */
 module.exports = function (req,res,next) {
     const token = req.headers['x-access-token'] || req.cookies.token
 

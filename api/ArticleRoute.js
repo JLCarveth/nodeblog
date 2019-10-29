@@ -42,6 +42,7 @@ router.post('/post', (req,res) => {
  * @memberof module:ArticleRoute
  * @name POST/blog/update
  * @function
+ * Updates the content of a given article, specified by an ID parameter.
  */
 router.post('/update', (req,res) => {
     const id = req.body.id
@@ -58,6 +59,7 @@ router.post('/update', (req,res) => {
  * @memberof module:ArticleRoute
  * @name POST/blog/delete
  * @function
+ * Removes the given post, as specified by an ID parameter. 
  */
 router.post('/delete', (req,res) => {
     const id = req.body.id
@@ -73,6 +75,7 @@ router.post('/delete', (req,res) => {
  * @memberof module:ArticleRoute
  * @name GET/blog/id
  * @function
+ * Fetches a post by its given ID
  */
 router.get('/:id', (req,res) => {
     const id = req.params.id
@@ -88,6 +91,7 @@ router.get('/:id', (req,res) => {
  * @memberof module:ArticleRoute
  * @name GET/blog/author
  * @function
+ * Get all articles written by the author with the specified ID.
  */
 router.get('/author/:id', (req,res) => {
     const id = req.params.id
@@ -103,6 +107,7 @@ router.get('/author/:id', (req,res) => {
  * @memberof module:ArticleRoute
  * @name GET/blog/
  * @function
+ * Fetches the 5 most recent articles.
  */
 router.get('/', (req,res) => {
     // TODO Change to take param from configuration
@@ -117,6 +122,7 @@ router.get('/', (req,res) => {
  * @memberof module:ArticleRoute
  * @name GET/blog/tags
  * @function
+ * Get all articles that contain the specified tag
  */
 router.get('/tags/:tag', (req,res) => {
     const tag = req.params.tag
@@ -131,6 +137,8 @@ router.get('/tags/:tag', (req,res) => {
  * @memberof module:ArticleRoute
  * @name GET/blog/approve
  * @function
+ * Approve the article, specified by the ID parameter. An approved article
+ * is visible to the end user.
  */
 router.get('/approve/:id', (req,res) => {
     const id = req.params.id
@@ -140,3 +148,5 @@ router.get('/approve/:id', (req,res) => {
         res.send({success:false,error:e})
     })
 })
+
+module.exports = router;
