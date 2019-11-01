@@ -4,7 +4,7 @@
  */
 
 const mongoose = require('mongoose')
-const isEmail = require('../validators').isEmail
+const isEmail = require('../utils/validator').isEmail
 
 /**
  * @constructor User

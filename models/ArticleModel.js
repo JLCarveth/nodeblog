@@ -4,11 +4,11 @@
  */
 
 const mongoose = require('mongoose')
-
+const Schema = mongoose.Schema
 /**
  * @constructor Article
  */
-const Article = new mongoose.Schema({
+const Article = new Schema({
     title: { type: String, required: true, trim: true },
     tagline: { type: String, required: false, trim: true },
     // Author refers to the ObjectID of a document in the users collection (a registered user)

@@ -9,3 +9,9 @@ A refactoring of the Node.js blog backend project.
 - **config**: System configuration happens in this module. Envorinment variables are populated.
 - **middlewares**: Express.js middlewares are stored here.
 - **utilities**: Data validation, hashing utilities, all stored in this module.
+
+
+## TODO:
+- IPFilterWare and failed login attempt tracking
+- Unit testing
+- Parameter validation middleware

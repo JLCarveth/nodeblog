@@ -1,0 +1,1 @@
+{"development":{"port":3005,"mongodbURI":"","secretKey":"","roles":[],"postFetchCount":5},"port":3005,"mongodbURI":"mongodb://admin:password1@ds231720.mlab.com:31720/nodejs","secretKey":"WwAJFYQj0w9MYUqaqlQp4L5u44gBBI2N","roles":[],"postFetchCount":5}

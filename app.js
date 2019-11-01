@@ -1,6 +1,8 @@
 /**
  * @author John L. Carveth
  * @version 0.1.0
+ * 
+ * Entry point for the software. 
  */
 
 const app = require('express')()
@@ -34,8 +36,12 @@ app.use('/ip', IPRoutes)
 app.use('/role', RoleRoutes)
 app.use('/', UserRoutes)
 
+// Connect to the DB specified in the config
 // To avoid the 'deprecated url parser' warning...
-mongoose.connect(process.env.mongodbURI, {useNewUrlParser:true}).catch(error => {
+mongoose.connect(process.env.mongodbURI, {
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}).catch(error => {
     throw new Error(error)
 }).then(result => {
     console.log('Mongoose database connected.')

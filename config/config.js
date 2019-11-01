@@ -30,7 +30,7 @@ module.exports = {
         const config = require('./config.json')
         // Detect environment to determine which configuration to use
         this.environment = process.env.NODE_ENV || 'development'
-        this.config = config[environment]
+        this.config = config[this.environment]
         // merge baseConfig and config stored on disk.
         this.config = {...baseConfig,...this.config}
         // update config stored on disk with any new config variables from baseConfig
