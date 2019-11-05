@@ -100,4 +100,13 @@ module.exports = class RoleService {
             throw new Error(e)
         }
     }
+
+    // TODO
+    async checkPermission (role,permission) {
+        try {
+            return this.roleModel.findOne({role})
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
 }

@@ -21,6 +21,7 @@ const RoleService = new (require('../services/RoleService'))(RoleModel)
 
 /**
  * GET request on /role/permissions/:role
+ * Gets all permissions assigned to a role.
  * @name GET/role/permissions/
  * @function
  * @memberof module:RoleRoute
@@ -35,12 +36,12 @@ router.get('/permissions/:role', (req,res) => {
 })
 
 /**
- * GET request on /role/grant/:role/:permission
- * @name GET/role/grant
+ * POST request on /role/grant/:role/:permission
+ * @name POST/role/grant
  * @function
  * @memberof module:RoleRoute
  */
-router.get('/grant/:role/:permission', (req,res) => {
+router.POST('/grant/:role/:permission', (req,res) => {
     const role = req.params.role
     const permission = req.params.permission
 
@@ -52,12 +53,12 @@ router.get('/grant/:role/:permission', (req,res) => {
 })
 
 /**
- * GET request on /role/revoke/:role/:permission
- * @name GET/role/revoke
+ * POST request on /role/revoke/:role/:permission
+ * @name POST/role/revoke
  * @function
  * @memberof module:RoleRoute
  */
-router.get('/revoke/:role/:permission', () => {
+router.post('/revoke/:role/:permission', () => {
     const role = req.params.role
     const permission = req.params.permission
 
@@ -69,15 +70,26 @@ router.get('/revoke/:role/:permission', () => {
 })
 
 /**
- * GET request on /role/revokeAll/:role
- * @name GET/role/revokeAll
+ * POST request on /role/revokeAll/:role
+ * @name POST/role/revokeAll
  * @function
  * @memberof module:RoleRoute
  */
-router.get('/revokeAll/:role', (req,res) => {
+router.post('/revokeAll/:role', (req,res) => {
     const role = req.params.role
 
     RoleService.revokeAllPermissions(role).then((result) => {
+        res.send({success:true, message:result})
+    }).catch((e) => {
+        res.send({success:false, error:e})
+    })
+})
+
+router.post('/check/:role/:permission', (req,res) => {
+    const role          = req.params.role
+    const permission    = req.params.permission
+
+    RoleService.checkPermission(role,permission).then((result) => {
         res.send({success:true, message:result})
     }).catch((e) => {
         res.send({success:false, error:e})
