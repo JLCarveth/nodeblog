@@ -3,7 +3,6 @@
 # Format:
 #       [permissionName] description
 
-[readPost] Allows a user to request a blog post from the server. Virtually all roles have this permission. (Perhaps superfluous, given users don't need to login to view blog posts)
 [commentPost] Allows a user to post a comment on a blog post.
 [removeComment] Allows a user to remove a comment from a blog post.
 [votePost] Allows a user to vote on a blog post.

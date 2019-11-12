@@ -26,7 +26,7 @@ const IPService = new (require('../services/IPService'))(IPModel)
 router.post('/ban', (req,res) => {
     const address = req.body.address
     const reason = req.body.reason
-
+    
     IPService.banAddress(address,reason).then((result) => {
         res.send({success:true, message:result})
     }).catch ((e) => {
@@ -56,8 +56,8 @@ router.post('/unban', (req,res) => {
  * @function
  * @memberof module:IPRoute
  */
-router.post('/check/:address', (req,res) => {
-    const address = req.params.address
+router.post('/check/', (req,res) => {
+    const address = req.body.address
 
     IPService.checkAddress(address).then((result) => {
         res.send({success:true, message:result})

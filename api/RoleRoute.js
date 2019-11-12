@@ -41,7 +41,7 @@ router.get('/permissions/:role', (req,res) => {
  * @function
  * @memberof module:RoleRoute
  */
-router.POST('/grant/:role/:permission', (req,res) => {
+router.post('/grant/:role/:permission', (req,res) => {
     const role = req.params.role
     const permission = req.params.permission
 

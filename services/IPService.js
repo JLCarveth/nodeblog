@@ -23,16 +23,10 @@ module.exports = class IPService {
      * @param {*} reason optional reason for being banned
      */
     async banAddress (address, reason) {
-        try {
-            const entry = await this.ipModel.create({
-                address: address,
-                reason: reason
-            }).exec()
-    
-            return entry
-        } catch (e) {
-            throw new Error(e)
-        }
+        return await this.ipModel.create({
+            address: address,
+            reason: reason
+        })
     }
 
     /**
@@ -42,11 +36,7 @@ module.exports = class IPService {
      * @param {*} address an IPv4 or IPv6 address
      */
     async unbanAddress (address) {
-        try {
-            return this.ipModel.deleteOne({address:address}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.ipModel.deleteOne({address:address}).exec()
     }
 
     /**
@@ -57,11 +47,6 @@ module.exports = class IPService {
      * @return true if the address is found in the collection
      */
     async checkAddress (address) {
-        try {
-            const result = await this.ipModel.findOne({address:address}).exec()
-            return result != null
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.ipModel.findOne({address:address}).exec()
     }
 }

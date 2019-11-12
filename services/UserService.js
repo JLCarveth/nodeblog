@@ -5,11 +5,11 @@
 module.exports = class UserService {
     /**
      * @constructor UserService
-     * @param {module:UserModel} userModel 
+     * @param {module:UserModel} UserModel 
      * @param {module:Authenticator} auth
      */
-    constructor (userModel, auth) {
-        this.userModel = userModel
+    constructor (UserModel, auth) {
+        this.UserModel = UserModel
         this.Authenticator = auth
     }
 
@@ -21,19 +21,14 @@ module.exports = class UserService {
      * @param {String} email 
      * @param {String} password 
      */
-    async register (username, email, password) {
+    register (username, email, password) {
         const hash = this.Authenticator.hashPassword(password)
-
-        try {
-            return UserModel.create({
-                username: username,
-                email: email,
-                password: hash.hash,
-                salt: hash.salt
-            })
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.UserModel.create({
+            'username': username,
+            'email': email,
+            'password': hash.hash,
+            'salt': hash.salt
+        })
     }
 
     /**
@@ -44,20 +39,18 @@ module.exports = class UserService {
      * @return A token generated for the user, or an error if authentication failed
      */
     async login (email, password) {
-        try {
-            const user = UserModel.findOne({email:email}).exec()
-            const valid = this.Authenticator.comparePassword(password, user.hash)
-
+        return new Promise(async (resolve,reject) => {
+            const user = await this.UserModel.findOne({email:email}).exec()
+            const valid = this.Authenticator.comparePassword(password, user.password, user.salt)
+    
             if (valid) {
-                return this.Authenticator.generateToken(email, user.role).then((token) => {
-                    return token
+                this.Authenticator.generateToken(email, user.role).then((token) => {
+                    resolve(token)
                 }) 
             } else {
-                throw new Error('Authentication has failed.')
+                reject('Authentication has failed.')
             }
-        } catch (e) {
-            throw new Error(e)
-        }
+        })
     }
 
     /**
@@ -68,7 +61,7 @@ module.exports = class UserService {
      */
     async deleteUser (id) {
         try {
-            return UserModel.deleteOne({_id:id}).exec()
+            return this.UserModel.deleteOne({_id:id}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -84,7 +77,7 @@ module.exports = class UserService {
      */
     async changePassword (oldPass, newPass, email) {
         try {
-            const user = UserModel.findOne({email:email}).exec()
+            const user = this.UserModel.findOne({email:email}).exec()
             const valid = user.password == this.Authenticator.hashWithSalt(
                 oldPass, user.salt
             )

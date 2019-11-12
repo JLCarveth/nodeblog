@@ -29,7 +29,7 @@ module.exports = class RoleWare {
                 } else res.send({success:false, error:'Missing permissions.'})
             }
         } catch (error) {
-            res.send({success:false,error:error})
+            throw error
         }
     }
 

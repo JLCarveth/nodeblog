@@ -51,7 +51,7 @@ module.exports = {
         try {
             return jwt.verify(token, process.env.secretKey)
         } catch (e) {
-            throw new Error(e)
+            throw e
         }
     },
 
@@ -93,11 +93,12 @@ module.exports = {
      * @memberof module:Authenticator
      * @function comparePassword
      * @param {String} password - String password attempt
-     * @param {Object} hash - object with hash and salt
+     * @param {String} hash - hash
+     * @param {String} salt - salt
      * @return {Boolean} true if the password and hash match
      */
-    comparePassword : function (password, hash) {
-        return hashWithSalt(password, hash.salt).hash == hash
+    comparePassword : function (password, hash, salt) {
+        return this.hashWithSalt(password, salt).hash == hash
     },
 
     /**
