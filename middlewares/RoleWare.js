@@ -7,6 +7,8 @@ const RoleService = new (require('../services/RoleService'))(RoleModel)
 /**
  * Middleware that protects routes by only allowing access to
  * those with the correct role credentials.
+ * 
+ * TODO: Allow multiple permissions from one RoleWare middleware
  * @module RoleWare
  * @author John L. Carveth
  * @version 0.4.0

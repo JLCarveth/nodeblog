@@ -7,6 +7,7 @@
  * ExpressJS middleware that automatically verifies JWTs attached to incoming requests.
  * If a token is successfully decoded, the role and email from the token are
  * stored in res.locals for later middlewares to access.
+ * This middleware should be executed before any route that requires authentication
  * 
  * res.locals.role  => The role that has been assigned to the authenticated user
  * res.locals.email => The email address of the authenticated user

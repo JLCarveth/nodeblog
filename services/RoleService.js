@@ -21,13 +21,9 @@ module.exports = class RoleService {
      * @return {Array.<String>} an array of permissions assigned to the role. Empty if the role doesn't exist
      */
     async getRolePermissions (roleName) {
-        try {
-            return this.roleModel.findAll({
-                role: roleName
-            }).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.findAll({
+            role: roleName
+        }).exec()
     }
 
     /**
@@ -38,16 +34,12 @@ module.exports = class RoleService {
      * @param {String} permission the permission to be granted
      */
     async grantPermission (roleName, permission) {
-        try {
-            const role = await roleModel.findOne({role:roleName}).exec()
-            var perms = role.permissions
+        const role = await roleModel.findOne({role:roleName}).exec()
+        var perms = role.permissions
 
-            perms.concat(','+permission)
+        perms.concat(','+permission)
 
-            return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
     }
 
     /**
@@ -58,20 +50,16 @@ module.exports = class RoleService {
      * @param {String} permission the permission to revoke
      */
     async revokePermission (roleName, permission) {
-        try {
-            const role = await roleModel.findOne({role:roleName}).exec()
-            var perms = role.permissions
+        const role = await roleModel.findOne({role:roleName}).exec()
+        var perms = role.permissions
 
-            // Splice the permission 
-            perms = perms.split(',')
-            const index = perms.indexOf(permission)
-            if (index != -1) perms.splice(index, 1)
-            perms = perms.join(',')
+        // Splice the permission 
+        perms = perms.split(',')
+        const index = perms.indexOf(permission)
+        if (index != -1) perms.splice(index, 1)
+        perms = perms.join(',')
 
-            return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.update({role:roleName}, {permissions:perms}).exec()
     }
 
     /**
@@ -81,11 +69,7 @@ module.exports = class RoleService {
      * @param {String} roleName 
      */
     async revokeAllPermissions (roleName) {
-        try {
-            return this.roleModel.update({role:roleName}, {permissions:""}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.update({role:roleName}, {permissions:""}).exec()
     }
 
     /**
@@ -94,19 +78,18 @@ module.exports = class RoleService {
      * @function getAllRoles
      */
     async getAllRoles () {
-        try {
-            return this.roleModel.findAll({}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.findAll({}).exec()
+
     }
 
-    // TODO
+    /**
+     * @memberof module:RoleService
+     * @function checkPermission
+     * @param {*} role 
+     * @param {*} permission 
+     */
     async checkPermission (role,permission) {
-        try {
-            return this.roleModel.findOne({role})
-        } catch (e) {
-            throw new Error(e)
-        }
+        return this.roleModel.findOne({role}).exec()
+
     }
 }
