@@ -6,3 +6,4 @@ config/*.json
 
 # Nodemodules
 ./node_modules
+node_modules

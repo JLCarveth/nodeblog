@@ -14,8 +14,9 @@
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "good-mongoose-seeder": "^1.1.0",
     "mongoose": "^5.7.7",
-    "npm": "^6.13.0"
+    "npm": "^6.13.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

@@ -12,6 +12,9 @@ const bodyParser    = require('body-parser')
 const cookieParser  = require('cookie-parser') 
 const cors          = require('cors')
 
+// Database Seeder
+const Seeder        = require('good-mongoose-seeder')
+
 // Data persistence
 const mongoose = require('mongoose')
 
@@ -24,6 +27,18 @@ const UserRoutes    = require('./api/UserRoute')
 // Initialize the configurator
 const Configurator = require('./config/config')
 Configurator.init()
+
+// Seed the roles to the database
+Seeder.addListener()
+Seeder.connect(Configurator.get(mongodbURI), {
+    useNewUrlParser:    true,
+    useUnifiedTopology: true
+}).then(() => Seeder.seedData({
+    model:      'roles',
+    documents:  Configurator.get('roles')
+})).catch((error) => {
+    console.error(error)
+}).finally(() => Seeder.disconnect())
 
 // Use the middleware
 app.use(cors())

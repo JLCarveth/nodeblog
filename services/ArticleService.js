@@ -77,7 +77,7 @@ module.exports = class ArticleService {
      */
     async updateArticle (id, content) {
         try {
-            return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now}).exec()
+            return this.articleModel.updateOne({_id:id}, {content:content, date:Date.now()}).exec()
         } catch (e) {
             throw new Error(e)
         }
@@ -95,7 +95,7 @@ module.exports = class ArticleService {
             const article = await this.articleModel.findById({_id:id}).exec()
             return article
         } catch (e) {
-            throw new Error(e)
+            throw e
         }
     }
 
