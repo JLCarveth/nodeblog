@@ -149,4 +149,22 @@ router.get('/approve/:id', (req,res) => {
     })
 })
 
+/**
+ * @memberof module:ArticleRoute
+ * @name POST/blog/comment
+ * @function
+ * Posts a new comment to the specified article.
+ */
+router.post('/comment', (req,res) => {
+    const articleID = req.params.articleID
+    const userID    = req.params.userID
+    const content   = req.params.content
+
+    ArticleService.postComment(articleID, userID, content).then((result) => {
+        res.send({success:true,message:result})
+    }).catch((error) => {
+        res.send({success:false, error:error})
+    })
+})
+
 module.exports = router;

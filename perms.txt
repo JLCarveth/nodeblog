@@ -3,15 +3,17 @@
 # Format:
 #       [permissionName] description
 
-[commentPost] Allows a user to post a comment on a blog post.
+[postComment] Allows a user to post a comment on a blog post.
 [removeComment] Allows a user to remove a comment from a blog post.
 [votePost] Allows a user to vote on a blog post.
 [createPost] Allows a user to submit a blog post to the system.
 [approvePost] Allows a user to approve an unapproved blog post, making it visible to other users. Should be reserved for high-trust users.
+[removePost] Removes an article.
 [editPostSelf] A user can edit a post they authored themselves. Only some fields may be edited (ex, post score cannot be altered). This includes deleting the post.
 [editPost] Allows a user to edit any blog post. As with `editPostSelf`, only some fields may be changed.
 [banip] Bans an IP address from accessing the server.
 [unbanip] Unbans an IP address from accessing the server.
+[checkip] See if an IP address has been banned.
 [deleteUser] Removes a user from the collection, revoking access.
 [verifyUser] Allows a user to manually verify the email address of another unverified user.
 [modifyRole] Allows a high-level user to alter roles and permissions
