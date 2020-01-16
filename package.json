@@ -1,7 +1,7 @@
 {
-  "name": "blog",
-  "version": "0.1.0",
-  "description": "A node.js-based blogging platform.",
+  "name": "restful-cms",
+  "version": "0.5.0",
+  "description": "A restful content management system.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

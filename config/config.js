@@ -24,6 +24,12 @@ const baseConfig = {
         "port"          : 3005,
         "mongodbURI"    : "mongodb://admin:password1@ds231720.mlab.com:31720/nodejs",
         "secretKey"     : generateSalt(),
+        "root"          : {
+            // A Default Administrator user
+            'username'  : 'admin',
+            'password'  : 'admin',
+            'role'      : 'admin'
+        },
         "roles"         : [
             {
                 "role" : "user", 
