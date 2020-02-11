@@ -11,7 +11,8 @@
  */
 
 const fs            = require('fs')
-const generateSalt  = require('../utils/auth').generateSalt()
+const generateSalt  = require('../utils/auth').generateSalt
+const deepermerge   = require('deeper-merge')
 
 /**
  * The base configuration of the system. If no config/config.js file exists,
@@ -28,7 +29,8 @@ const baseConfig = {
             // A Default Administrator user
             'username'  : 'admin',
             'password'  : 'admin',
-            'role'      : 'admin'
+            'role'      : 'admin',
+            'email'     : 'admin@localhost.com'
         },
         "roles"         : [
             {
@@ -95,13 +97,13 @@ module.exports = {
         this.writeConfig(baseConfig, 'ax')
         // Import it
         const config = require('./config.json')
+        // merge baseConfig and config stored on disk.
+        this.config = deepermerge.merge(baseConfig, this.config)
+        // update config stored on disk with any new config variables from baseConfig
+        this.writeConfig(this.config, 'w')
         // Detect environment to determine which configuration to use
         this.environment = process.env.NODE_ENV || 'development'
         this.config = config[this.environment]
-        // merge baseConfig and config stored on disk.
-        this.config = {...baseConfig,...this.config}
-        // update config stored on disk with any new config variables from baseConfig
-        this.writeConfig(this.config, 'w')
         // Assign config values to provess.env variables
         this.populateEnvironment()
     },
@@ -136,11 +138,25 @@ module.exports = {
     },
 
     /**
+     * Merges the hardcoded base configuration setup with another configuration
+     * object. 
+     * @param {Object} baseConfig 
+     * @param {Object} userConfig 
+     */
+    mergeConfig : function (baseConfig, userConfig) {
+        // For each property in baseConfig, add property to userConfig
+        // if not contained
+        for (const key in baseConfig) {
+
+        }
+    },
+
+    /**
      * Retrieves the value stored at the given key.
      * @param {String} key the key of the data to retrieve
      * @return {*} the value stored at key
      */
     get : function (key) {
-        return config[key]
+        return this.config[key]
     }
 }

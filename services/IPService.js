@@ -23,7 +23,7 @@ module.exports = class IPService {
      * @param {*} reason optional reason for being banned
      */
     async banAddress (address, reason) {
-        return await this.ipModel.create({
+        return this.ipModel.create({
             address: address,
             reason: reason
         })

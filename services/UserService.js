@@ -38,7 +38,7 @@ module.exports = class UserService {
      * @param {String} password 
      * @return A token generated for the user, or an error if authentication failed
      */
-    async login (email, password) {
+    login (email, password) {
         return new Promise(async (resolve,reject) => {
             const user = await this.UserModel.findOne({email:email}).exec()
             const valid = this.Authenticator.comparePassword(password, user.password, user.salt)
@@ -59,21 +59,18 @@ module.exports = class UserService {
      * @function deleteUser
      * @param {ObjectID} id the unique ID of the user to delete
      */
-    async deleteUser (id) {
-        try {
-            return this.UserModel.deleteOne({_id:id}).exec()
-        } catch (e) {
-            throw new Error(e)
-        }
+    deleteUser (id) {
+        return this.UserModel.deleteOne({_id:id}).exec()
     }
 
     /**
      * Change a registered user's existing password.
+     * Checks to see if oldPass matches the current password before making a change.
      * @memberof module:UserService
      * @function changePassword
-     * @param {String} oldPass 
-     * @param {String} newPass 
-     * @param {String} email 
+     * @param {String} oldPass the user's old password to be changed
+     * @param {String} newPass the desired new password
+     * @param {String} email the user's email address.
      */
     async changePassword (oldPass, newPass, email) {
         try {

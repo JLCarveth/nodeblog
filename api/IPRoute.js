@@ -1,21 +1,25 @@
 /**
  * @module IPRoute
  * @requires express
+ * @requires module:IPService
+ * @requires module:ParamWare
  * IPRoute router acts on "/ip" baseURL
  */
 
 /**
- * @const express
- */
-const express = require('express')
-
-/**
  * @const ipRouter
  */
-const router = express.Router()
+const router    = require('express').Router()
 
-const IPModel = require('../models/IPModel')
+const mongoose = require('mongoose')
+
+const IPModel   = require('../models/IPModel')
 const IPService = new (require('../services/IPService'))(IPModel)
+const ParamWare = new (require('../middlewares/ParamWare'))('body','address')
+
+// Apply the parameter middleware to both routes
+router.use('/ban', ParamWare)
+router.use('/unban', ParamWare)
 
 /**
  * POST request to /ip/ban
@@ -30,7 +34,7 @@ router.post('/ban', (req,res) => {
     IPService.banAddress(address,reason).then((result) => {
         res.send({success:true, message:result})
     }).catch ((e) => {
-        res.send({success:false, error:e})
+        res.send({success:false, 'error':e})
     })
 })
 

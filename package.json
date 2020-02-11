@@ -13,10 +13,11 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
+    "deeper-merge": "^0.1.2",
     "express": "^4.17.1",
-    "good-mongoose-seeder": "^1.1.0",
+    "good-mongoose-seeder": "^1.1.2",
     "mongoose": "^5.7.7",
-    "npm": "^6.13.6"
+    "npm": "^6.13.7"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

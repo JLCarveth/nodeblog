@@ -24,14 +24,14 @@ module.exports = class RoleWare {
         this.cache = []
         try {
             this.populateCache()
-            that = this
+            var that = this
             return function (req,res,next) {
                 if (that.checkPermission(that.permission, res.locals.role)) {
                     next()
                 } else res.send({success:false, error:'Missing permissions.'})
             }
         } catch (error) {
-            throw error
+            console.error(error)
         }
     }
 
@@ -41,11 +41,11 @@ module.exports = class RoleWare {
      * Stores roles and permissions fetched from the database to a cache obj
      */
     populateCache () {
-        that = this;
+        var that = this;
         RoleService.getAllRoles().then((roles) => {
             that.cache = roles
         }).catch((e) => {
-            throw new Error(e)
+            console.error(e)
         })
     }
 
@@ -56,7 +56,7 @@ module.exports = class RoleWare {
      * @param {*} role 
      */
     checkPermission (permission, role) {
-        contains = false;
+        var contains = false;
         this.cache.forEach((item) => {
             if (item.role == role) {
                 item.permissions.forEach((item) => {

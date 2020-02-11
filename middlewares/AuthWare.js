@@ -3,6 +3,7 @@
  * @author John L. Carveth
  * @version 0.2.0
  * @requires module:Authenticator
+ * @requires express
  * 
  * ExpressJS middleware that automatically verifies JWTs attached to incoming requests.
  * If a token is successfully decoded, the role and email from the token are
@@ -35,5 +36,5 @@ module.exports = function (req,res,next) {
         } catch (e) {
             res.send({success:false, error:e})
         }
-    }
+    } else res.send({success:false, error:"No token provided. Get a token and provide it with the x-access-token header."})
 }

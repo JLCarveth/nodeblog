@@ -15,5 +15,5 @@
 [unbanip] Unbans an IP address from accessing the server.
 [checkip] See if an IP address has been banned.
 [deleteUser] Removes a user from the collection, revoking access.
-[verifyUser] Allows a user to manually verify the email address of another unverified user.
+[modifyUser] Allows control over the modification of a User document. Can verify a user or change their password.
 [modifyRole] Allows a high-level user to alter roles and permissions

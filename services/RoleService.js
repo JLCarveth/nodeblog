@@ -78,7 +78,7 @@ module.exports = class RoleService {
      * @function getAllRoles
      */
     async getAllRoles () {
-        return this.roleModel.findAll({}).exec()
+        return this.roleModel.find({}).exec()
 
     }
 

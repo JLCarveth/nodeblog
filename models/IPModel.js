@@ -3,7 +3,7 @@
  * @author John L. Carveth
  */
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+mongoose.Promise = Promise
 
 /**
  * @constructor IP
