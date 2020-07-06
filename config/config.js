@@ -23,7 +23,7 @@ const deepermerge   = require('deeper-merge')
 const baseConfig = {
     "development" : {
         "port"          : 3005,
-        "mongodbURI"    : "mongodb://admin:password1@ds231720.mlab.com:31720/nodejs",
+        "mongodbURI"    : "",
         "secretKey"     : generateSalt(),
         "root"          : {
             // A Default Administrator user
@@ -57,8 +57,8 @@ const baseConfig = {
         "postFetchCount": 5
     },
     "production" : {
-        "port"          : 3005,
-        "mongodbURI"    : "production url goes here!",
+        "port"          : 80,
+        "mongodbURI"    : "",
         "secretKey"     : "",
         "roles"         : [
             {
