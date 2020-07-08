@@ -1,3 +1,29 @@
+body {
+    background-color:#44475a;
+}
+
 a.navbar-brand {
     font-family:'Share Tech', sans-serif;
+    color: #bbe1fa;
+}
+
+a.nav-link {
+    color: #bbe1fa;
+}
+
+.nav-item:hover {
+    background-color: #0f4c75
+}
+
+nav.navbar {
+    background-color: #282a36;
+}
+
+div.card {
+    background-color: #282a36;
+    color: #f8f8f2;
+}
+
+p, a.nav-link {
+    font-family: 'Open Sans', sans-serif
 }

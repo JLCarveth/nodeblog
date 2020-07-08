@@ -9,7 +9,9 @@
             <%- include('../partials/navbar'); -%>
         </header>
         <main>
-            This is a test!
+            <div class="container pt-4">
+                <%- include('../partials/post', {'post' : post}) %>
+            </div>
         </main>
     </body>
 </html>

@@ -1,0 +1,25 @@
+<!-- 
+post.ejs
+
+    A template for displaying data from a single article. This partial
+    should be passed a `post` object upon inclusion with the following properties:
+        - title
+        - subtitle
+        - author
+        - date
+        - content
+        - comments
+    This partial is used for previewing articles, and so content should be 
+    truncated to roughly 100 chars and end in "...", and comments should only
+    be an integer representing the number of comments on the article. 
+    Author should be the author name, and not the raw ID
+-->
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title"><%- post.title %></h4>
+        <h6 class="card-subtitle float-left font-weight-light ml-2"><%- post.subtitle %></h6>
+        <h6 class="card-subtitle float-right font-weight-lighter font-italic mt-2"><%- post.author %>, <%- post.date %></h6>
+        <div style="clear: both;"></div>
+        <p class="card-text ml-4 mt-2"><%- post.content %></p>
+    </div>
+</div>
