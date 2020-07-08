@@ -1,0 +1,17 @@
+<!-- views/pages/index.ejs -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/head'); -%>
+    </head>
+    <body>
+        <header>
+            <%- include('../partials/navbar'); -%>
+        </header>
+        <main>
+            <div class="container pt-4">
+                <%- include('../partials/post', {'post' : post}) %>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,12 +1,13 @@
 /**
  * @author John L. Carveth
- * @version 0.5.5
+ * @version 0.6.0
  * 
  * Application entry point.
  */
 
 // Where it all began...
-const app = require('express')()
+const express = require('express')
+const app = express()
 
 // Third party middleware
 const bodyParser    = require('body-parser')
@@ -29,6 +30,14 @@ const Routers = require('./api')
 // Initialize the configurator
 const Configurator = require('./config/config')
 Configurator.init()
+
+//Set views directory
+app.set('views', './views')
+// Set the express view engine
+app.set('view engine', 'ejs')
+
+// Add the public folder to express
+app.use(express.static('public'))
 
 // Use the middleware
 app.use(cors())
@@ -54,6 +63,7 @@ app.use('/blog', Routers.ArticleRoute)
 app.use('/ip', Routers.IPRoute)
 app.use('/role', Routers.RoleRoute)
 app.use('/', Routers.UserRoute)
+app.use('/', Routers.ViewRoute)
 
 const server = app.listen(process.env.port)
 
