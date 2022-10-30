@@ -129,7 +129,7 @@ module.exports = {
      */
     writeConfig : function (configuration, flag) {
         try {
-            fs.writeFileSync('./config/config.json', JSON.stringify(configuration), {flag: flag})
+            fs.writeFileSync('./config/config.json', JSON.stringify(configuration, null, 2), {flag: flag})
         } catch (e) {
             if (e.code === "EEXIST") {
                 console.log('Configuration file already exists.')
